@@ -1,7 +1,7 @@
 FROM rockylinux:9
 
 # install packages
-RUN dnf install -y vim libxslt ncurses
+RUN dnf install -y vim libxslt ncurses procps-ng iproute
 
 # add config files
 COPY ./dotfiles/* /root/
