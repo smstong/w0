@@ -10,7 +10,8 @@ RUN dnf install -y vim \
 		bind-utils \
 		openldap-clients \
 		nmap-ncat \
-		iputils
+		iputils \
+        net-tools
 
 # add config files
 COPY ./dotfiles/* /root/
