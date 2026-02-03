@@ -11,7 +11,8 @@ RUN dnf install -y vim \
 		openldap-clients \
 		nmap-ncat \
 		iputils \
-        net-tools
+        net-tools \
+		postgresql
 
 # add config files
 COPY ./dotfiles/* /root/

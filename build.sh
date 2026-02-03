@@ -3,25 +3,11 @@ set -e
 selfDir=$(cd `dirname $0`; pwd)
 cd $selfDir
 
-function Usage(){
-	echo -e "Usage: $(basenae $0) [ version ]"
-	exit
-}
+VERSION=$(date '+%Y.%m.%d')
 
-APP_NAME=w0
-VERSION=${1:-latest}
-ARCHS=(amd64 arm64)
-TAGS=()
-MANIFEST=smstong/$APP_NAME:$VERSION
+# create backend images
+docker build --platform=linux/amd64,linux/arm64 -t smstong/w0:$VERSION .
+docker tag smstong/w0:$VERSION smstong/w0:latest
 
-# build/push images for each platform
-for arch in ${ARCHS[@]}; do
-	tag=smstong/${APP_NAME}-${arch}:$VERSION
-	docker build --platform linux/$arch -t $tag .
-	docker push $tag
-	TAGS+=($tag)
-done
-
-# build/push manifest
-docker manifest create --amend $MANIFEST ${TAGS[@]}
-docker manifest push $MANIFEST
+docker push smstong/w0:$VERSION
+docker push smstong/w0:latest
