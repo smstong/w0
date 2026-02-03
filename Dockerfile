@@ -17,6 +17,8 @@ RUN dnf install -y vim \
 # add config files
 COPY ./dotfiles/* /root/
 
+RUN sed -ie '$aalias ll="ls -l"' /root/.bashrc
+
 # default app to run
 ENTRYPOINT ["bash", "-c"]
 CMD ["echo", "personal work station container"]
